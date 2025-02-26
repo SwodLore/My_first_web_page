@@ -2,7 +2,7 @@
     --blanco: #FFFFFF;
     --oscuro: #212121;
     --primario: #FFC107;
-    --secundario: #0097A7;
+    --secundario: #007BFF;
     --gris: #757575;
     --grisClaro: #DFE9F3;
 }
@@ -33,7 +33,10 @@ h3 {
 h1,h2,h3{
     text-align: center;
 }
-
+a {
+    text-decoration: none;
+    color: black;
+}
 .titulo span{
     font-size: 2rem;
 }
