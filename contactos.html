@@ -1,86 +1,479 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Web</title>
+    <meta name="description" content="Contáctame para tu proyecto web. Alessandro Poves — Desarrollador Web en Huancayo, Perú.">
+    <meta name="author" content="Alessandro Poves">
+    <title>Contacto | Alessandro Poves</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="preload" href="css/normalize.css" as="styles">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Krub&display=swap" rel="stylesheet">
-    <link rel="preload" href="css/styles.css" as="styles">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ── Estilos exclusivos de Contacto ── */
+        .contacto-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        /* Datos de contacto */
+        .info-contacto { display: flex; flex-direction: column; gap: 2.4rem; }
+        .info-card {
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: var(--radio-lg);
+            padding: 2.4rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.6rem;
+            box-shadow: var(--sombra-sm);
+            transition: transform .25s, box-shadow .25s;
+        }
+        .info-card:hover { transform: translateY(-3px); box-shadow: var(--sombra-md); }
+        .info-icono {
+            width: 5rem; height: 5rem;
+            background: #EFF6FF;
+            border-radius: var(--radio-lg);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primario);
+            flex-shrink: 0;
+        }
+        .info-texto h3 { font-size: 1.5rem; color: var(--oscuro); margin-bottom: .3rem; }
+        .info-texto p, .info-texto a {
+            font-size: 1.5rem;
+            color: var(--texto-claro);
+            line-height: 1.6;
+            transition: color .2s;
+        }
+        .info-texto a:hover { color: var(--primario); }
+
+        /* Disponibilidad */
+        .disponibilidad {
+            background: linear-gradient(135deg, var(--primario) 0%, #0EA5E9 100%);
+            border-radius: var(--radio-lg);
+            padding: 2.8rem;
+            color: var(--blanco);
+        }
+        .disponibilidad h3 { color: var(--blanco); font-size: 1.8rem; margin-bottom: 1.6rem; }
+        .disponibilidad-items { display: flex; flex-direction: column; gap: 1rem; }
+        .dispon-item { display: flex; align-items: center; gap: 1rem; font-size: 1.45rem; color: rgba(255,255,255,.9); }
+        .dispon-item::before {
+            content: '✓';
+            width: 2.2rem; height: 2.2rem;
+            background: rgba(255,255,255,.2);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Formulario grande */
+        .formulario-grande {
+            background: var(--oscuro);
+            border-radius: var(--radio-lg);
+            padding: 4rem;
+            box-shadow: var(--sombra-lg);
+        }
+        .formulario-grande legend {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--blanco);
+            margin-bottom: 2.8rem;
+            display: block;
+        }
+        .formulario-grande legend span { color: #38BDF8; }
+
+        /* Tipos de servicio */
+        .opciones-servicio {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: .4rem;
+        }
+        .opcion-label {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: 1.2rem 1.4rem;
+            border: 1.5px solid rgba(255,255,255,.12);
+            border-radius: var(--radio);
+            cursor: pointer;
+            font-size: 1.45rem;
+            color: rgba(255,255,255,.7);
+            transition: all .2s;
+            background: rgba(255,255,255,.04);
+        }
+        .opcion-label:has(input:checked),
+        .opcion-label:hover {
+            border-color: var(--primario);
+            background: rgba(37,99,235,.15);
+            color: var(--blanco);
+        }
+        .opcion-label input[type="radio"] { accent-color: var(--primario); }
+
+        /* Presupuesto */
+        .presupuesto-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .presup-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: .4rem;
+            padding: 1.4rem 1rem;
+            border: 1.5px solid rgba(255,255,255,.12);
+            border-radius: var(--radio);
+            cursor: pointer;
+            text-align: center;
+            transition: all .2s;
+            background: rgba(255,255,255,.04);
+        }
+        .presup-label:has(input:checked),
+        .presup-label:hover {
+            border-color: #38BDF8;
+            background: rgba(56,189,248,.12);
+        }
+        .presup-label input { display: none; }
+        .presup-precio { font-size: 1.6rem; font-weight: 700; color: #38BDF8; }
+        .presup-desc { font-size: 1.2rem; color: rgba(255,255,255,.6); }
+
+        /* Mapa placeholder */
+        .mapa-placeholder {
+            background: linear-gradient(135deg, #EFF6FF 0%, #BFDBFE 100%);
+            border-radius: var(--radio-lg);
+            height: 30rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.2rem;
+            color: var(--primario);
+            border: 1px solid var(--borde);
+        }
+        .mapa-placeholder svg { opacity: .6; }
+        .mapa-placeholder p { font-size: 1.55rem; font-weight: 600; }
+        .mapa-placeholder span { font-size: 1.35rem; color: var(--texto-claro); }
+
+        /* FAQ */
+        .faq-lista { display: flex; flex-direction: column; gap: 1.2rem; max-width: 80rem; margin-inline: auto; }
+        .faq-item { border: 1px solid var(--borde); border-radius: var(--radio-lg); overflow: hidden; }
+        .faq-pregunta {
+            width: 100%; padding: 2rem 2.4rem;
+            background: var(--blanco); border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 1.6rem; font-weight: 600; color: var(--oscuro);
+            text-align: left;
+            transition: background .2s;
+        }
+        .faq-pregunta:hover { background: #EFF6FF; }
+        .faq-pregunta svg { flex-shrink: 0; transition: transform .3s; color: var(--primario); }
+        .faq-respuesta { display: none; padding: 0 2.4rem 2rem; background: var(--blanco); }
+        .faq-respuesta p { font-size: 1.5rem; color: var(--texto-claro); line-height: 1.8; }
+        .faq-item.abierto .faq-pregunta { background: #EFF6FF; }
+        .faq-item.abierto .faq-pregunta svg { transform: rotate(180deg); }
+        .faq-item.abierto .faq-respuesta { display: block; }
+
+        @media (max-width: 768px) {
+            .contacto-layout { grid-template-columns: 1fr; }
+            .opciones-servicio { grid-template-columns: 1fr; }
+            .presupuesto-grid { grid-template-columns: repeat(2, 1fr); }
+            .formulario-grande { padding: 2.8rem 2rem; }
+        }
+        @media (max-width: 480px) {
+            .presupuesto-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1 class="titulo"><a href="https://www.linkedin.com/in/alessandro-piero-poves-martinez-524467318/" referrerPolicy="no-referrer" target="_blank" class="font-bold underline" >Alessandro Poves</a> <span>:3</span></h1>
+
+    <header class="header">
+        <div class="header-inner contenedor">
+            <div class="logo">
+                <a href="index.html" aria-label="Inicio">
+                    <span class="logo-inicial">AP</span>
+                    <span class="logo-nombre">Alessandro<strong>Poves</strong></span>
+                </a>
+            </div>
+            <nav class="navegacion-principal" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="nosotros.html" class="nav-link">Nosotros</a>
+                <a href="clientes.html" class="nav-link">Clientes</a>
+                <a href="contactos.html" class="nav-link activo">Contacto</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </header>
-    <div class="nav-bg">
-        <nav class="navegacion-principal contenedor">
-            <a href="/index.html">Inicio</a>
-            <a href="/nosotros.html">Nosotros</a>
-            <a href="/clientes.html">Clientes</a>
-            <a href="/contactos.html">Contactos</a>
-        </nav>
-    </div>
 
-    <section class="hero">
-        <div class="contenido-hero">
-            <h2 class="titulo">Diseño y Desarrollo Web</h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-google-maps" width="76" height="76" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffbf00" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M12 9.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" />
-                        <path d="M6.428 12.494l7.314 -9.252" />
-                        <path d="M10.002 7.935l-2.937 -2.545" />
-                        <path d="M17.693 6.593l-8.336 9.979" />
-                        <path d="M17.591 6.376c.472 .907 .715 1.914 .709 2.935a7.263 7.263 0 0 1 -.72 3.18a19.085 19.085 0 0 1 -2.089 3c-.784 .933 -1.49 1.93 -2.11 2.98c-.314 .62 -.568 1.27 -.757 1.938c-.121 .36 -.277 .591 -.622 .591c-.315 0 -.463 -.136 -.626 -.593a10.595 10.595 0 0 0 -.779 -1.978a18.18 18.18 0 0 0 -1.423 -2.091c-.877 -1.184 -2.179 -2.535 -2.853 -4.071a7.077 7.077 0 0 1 -.621 -2.967a6.226 6.226 0 0 1 1.476 -4.055a6.25 6.25 0 0 1 4.811 -2.245a6.462 6.462 0 0 1 1.918 .284a6.255 6.255 0 0 1 3.686 3.092z" />
-                    </svg>
-                <p>Huancayo Junin Perú</p>
-
-                <a class="boton" href="#">Contactar</a>
+    <!-- PAGE HERO -->
+    <section class="page-hero" aria-label="Encabezado Contacto">
+        <div class="page-hero-content contenedor">
+            <p class="seccion-tag">Hablemos</p>
+            <h1>Contáctame</h1>
+            <p>Respondo en menos de 24 horas. ¡Cuéntame tu proyecto!</p>
         </div>
     </section>
-    
-    <main class="contenedor sombra">
 
-        <section>
-            <h2>Contacto</h2>
-            <form class="formulario">
-                <fieldset>
-                    <legend>Contactanos llenando todos los campos</legend>
-                    <div class="contenedor-campos">
-                        <div class="campo">
-                            <label for="">Nombre</label>
-                            <input class="input-text" type="text" placeholder="Nombre">
+    <main>
+
+        <!-- FORMULARIO + INFO -->
+        <section class="seccion" aria-labelledby="titulo-contacto">
+            <div class="contenedor">
+                <div class="contacto-layout">
+
+                    <!-- Columna izquierda: info -->
+                    <aside aria-label="Información de contacto">
+                        <div class="info-contacto">
+
+                            <div class="info-card">
+                                <div class="info-icono">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                                </div>
+                                <div class="info-texto">
+                                    <h3>Ubicación</h3>
+                                    <p>Huancayo, Junín<br>Perú</p>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-icono">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <div class="info-texto">
+                                    <h3>Correo electrónico</h3>
+                                    <a href="mailto:apovesmartinez@gmail.com">apovesmartinez@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-icono">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                </div>
+                                <div class="info-texto">
+                                    <h3>WhatsApp</h3>
+                                    <a href="https://wa.me/51999999999" target="_blank" rel="noopener noreferrer">+51 999 999 999</a>
+                                </div>
+                            </div>
+
+                            <div class="info-card">
+                                <div class="info-icono">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                </div>
+                                <div class="info-texto">
+                                    <h3>Horario de atención</h3>
+                                    <p>Lun — Vie: 8:00 am — 8:00 pm<br>Sábados: 9:00 am — 2:00 pm</p>
+                                </div>
+                            </div>
+
+                            <div class="disponibilidad">
+                                <h3>¿Por qué trabajar conmigo?</h3>
+                                <div class="disponibilidad-items">
+                                    <p class="dispon-item">Respuesta en menos de 24 h</p>
+                                    <p class="dispon-item">Presupuesto sin compromiso</p>
+                                    <p class="dispon-item">Soporte post-entrega</p>
+                                    <p class="dispon-item">Código limpio y documentado</p>
+                                    <p class="dispon-item">Diseño 100% responsivo</p>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="campo">
-                            <label for="">Numero de celular</label>
-                            <input class="input-text" type="tel" placeholder="Numero de celular">
-                        </div>
-                        <div class="campo">
-                            <label for="">Correo</label>
-                            <input class="input-text" type="email" placeholder="Correo electronico">
-                        </div>
-                        <div class="campo">
-                            <label for="">Mensaje  </label>
-                            <textarea class="input-text"></textarea>
+                    </aside>
+
+                    <!-- Columna derecha: formulario -->
+                    <div>
+                        <form class="formulario-grande" novalidate aria-labelledby="titulo-formulario">
+                            <fieldset>
+                                <legend id="titulo-formulario">Cuéntame tu <span>proyecto</span></legend>
+
+                                <div class="form-grid">
+                                    <div class="campo">
+                                        <label for="nombre">Nombre completo *</label>
+                                        <input id="nombre" class="input-text" type="text" placeholder="Tu nombre" required autocomplete="name">
+                                    </div>
+                                    <div class="campo">
+                                        <label for="empresa">Empresa / Proyecto</label>
+                                        <input id="empresa" class="input-text" type="text" placeholder="Nombre de tu empresa" autocomplete="organization">
+                                    </div>
+                                    <div class="campo campo-full">
+                                        <label for="correo">Correo electrónico *</label>
+                                        <input id="correo" class="input-text" type="email" placeholder="correo@ejemplo.com" required autocomplete="email">
+                                    </div>
+                                    <div class="campo campo-full">
+                                        <label for="telefono">Teléfono / WhatsApp</label>
+                                        <input id="telefono" class="input-text" type="tel" placeholder="+51 999 999 999" autocomplete="tel">
+                                    </div>
+                                </div>
+
+                                <!-- Tipo de servicio -->
+                                <div class="campo" style="margin-top:2rem;">
+                                    <p class="campo" style="color:rgba(255,255,255,.8); font-size:1.4rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:.8rem;">Tipo de servicio</p>
+                                    <div class="opciones-servicio">
+                                        <label class="opcion-label">
+                                            <input type="radio" name="servicio" value="diseño" checked>
+                                            🎨 Diseño Web
+                                        </label>
+                                        <label class="opcion-label">
+                                            <input type="radio" name="servicio" value="app">
+                                            💻 Aplicación Web
+                                        </label>
+                                        <label class="opcion-label">
+                                            <input type="radio" name="servicio" value="ecommerce">
+                                            🛒 E-Commerce
+                                        </label>
+                                        <label class="opcion-label">
+                                            <input type="radio" name="servicio" value="seo">
+                                            📈 SEO / Mejoras
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Presupuesto -->
+                                <div class="campo" style="margin-top:2rem;">
+                                    <p style="color:rgba(255,255,255,.8); font-size:1.4rem; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:.8rem;">Presupuesto estimado</p>
+                                    <div class="presupuesto-grid">
+                                        <label class="presup-label">
+                                            <input type="radio" name="presupuesto" value="basico">
+                                            <span class="presup-precio">S/ 300</span>
+                                            <span class="presup-desc">Básico</span>
+                                        </label>
+                                        <label class="presup-label">
+                                            <input type="radio" name="presupuesto" value="estandar" checked>
+                                            <span class="presup-precio">S/ 600</span>
+                                            <span class="presup-desc">Estándar</span>
+                                        </label>
+                                        <label class="presup-label">
+                                            <input type="radio" name="presupuesto" value="premium">
+                                            <span class="presup-precio">S/ 1200+</span>
+                                            <span class="presup-desc">Premium</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Mensaje -->
+                                <div class="campo campo-full" style="margin-top:2rem;">
+                                    <label for="mensaje">Descripción del proyecto *</label>
+                                    <textarea id="mensaje" class="input-text" placeholder="Cuéntame qué necesitas: páginas, funcionalidades, referencias visuales, plazos..." rows="5" required></textarea>
+                                </div>
+
+                                <div class="form-enviar" style="margin-top:2.4rem;">
+                                    <button class="boton boton-primario" type="submit" style="width:100%; justify-content:center; font-size:1.7rem; padding:1.4rem;">
+                                        Enviar solicitud
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                                    </button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- MAPA -->
+        <section class="seccion" style="background-color: var(--gris-claro); padding-block:5rem;" aria-label="Ubicación">
+            <div class="contenedor">
+                <div class="seccion-encabezado" style="margin-bottom:3rem;">
+                    <p class="seccion-tag">Dónde estoy</p>
+                    <h2>Ubicación</h2>
+                </div>
+                <div class="mapa-placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                    <p>Huancayo, Junín — Perú</p>
+                    <span>Universidad Nacional del Centro del Perú</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="seccion" aria-labelledby="titulo-faq">
+            <div class="contenedor">
+                <div class="seccion-encabezado">
+                    <p class="seccion-tag">Dudas frecuentes</p>
+                    <h2 id="titulo-faq">Preguntas Frecuentes</h2>
+                </div>
+                <div class="faq-lista" role="list">
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-pregunta" aria-expanded="false">
+                            ¿Cuánto tiempo toma desarrollar un sitio web?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-respuesta">
+                            <p>Depende del tipo y complejidad del proyecto. Una landing page puede estar lista en 3–5 días; un sitio corporativo toma entre 1 y 3 semanas; y un e-commerce completo puede llevar de 3 a 6 semanas.</p>
                         </div>
                     </div>
 
-                        <div class="alinear-derecha flex">
-                            <input class="boton w-100" type="submit" value="Enviar">
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-pregunta" aria-expanded="false">
+                            ¿Incluyes hosting y dominio?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-respuesta">
+                            <p>Puedo asesorarte y gestionar la contratación de hosting y dominio. Los costos de hosting y dominio son independientes al costo de desarrollo, y los mejores proveedores para tu caso serán recomendados según el proyecto.</p>
                         </div>
-                    
-                </fieldset>
-            </form>
-            
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-pregunta" aria-expanded="false">
+                            ¿El diseño será responsivo para móviles?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-respuesta">
+                            <p>Sí, siempre. Todos mis proyectos son desarrollados con enfoque Mobile-First, garantizando una experiencia perfecta en smartphones, tablets y escritorio. También valido en múltiples navegadores.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" role="listitem">
+                        <button class="faq-pregunta" aria-expanded="false">
+                            ¿Qué necesito para empezar?
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="faq-respuesta">
+                            <p>Solo necesitas contarme tu idea. A partir de ahí preparo una propuesta con el presupuesto, los plazos y las funcionalidades. No necesitas saber nada de tecnología; me encargo de todo el proceso técnico.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </section>
+
     </main>
 
-    <footer class="footer">
-        <p>Todos los derechos reservados: Alessandro Poves - My first project Web</p>
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner contenedor">
+            <p class="footer-copy">&copy; 2025 <strong>Alessandro Poves</strong>. Todos los derechos reservados.</p>
+            <nav class="footer-nav" aria-label="Redes sociales">
+                <a href="https://www.linkedin.com/in/alessandro-piero-poves-martinez-524467318/" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/SwodLore" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                </a>
+            </nav>
+        </div>
     </footer>
-        
+
+    <script>
+        // FAQ accordion
+        document.querySelectorAll('.faq-pregunta').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const abierto = item.classList.contains('abierto');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('abierto'));
+                if (!abierto) item.classList.add('abierto');
+                btn.setAttribute('aria-expanded', !abierto);
+            });
+        });
+    </script>
 </body>
 </html>

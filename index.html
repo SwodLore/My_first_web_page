@@ -1,140 +1,216 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Web</title>
+    <meta name="description" content="Alessandro Poves - Desarrollador Web profesional especializado en Diseño Web, Aplicaciones Web y E-Commerce. Huancayo, Junín, Perú.">
+    <meta name="keywords" content="diseño web, desarrollo web, e-commerce, aplicaciones web, Huancayo, Perú">
+    <meta name="author" content="Alessandro Poves">
+    <title>Alessandro Poves | Desarrollador Web</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="preload" href="css/normalize.css" as="styles">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Krub&display=swap" rel="stylesheet">
-    <link rel="preload" href="css/styles.css" as="styles">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <header>
-        <h1 class="titulo"><a href="https://www.linkedin.com/in/alessandro-piero-poves-martinez-524467318/" referrerPolicy="no-referrer" target="_blank" class="font-bold underline" >Alessandro Poves</a> <span>:3</span></h1>
+
+    <!-- HEADER con Flexbox: logo + nav -->
+    <header class="header">
+        <div class="header-inner contenedor">
+            <div class="logo">
+                <a href="index.html" aria-label="Inicio">
+                    <span class="logo-inicial">AP</span>
+                    <span class="logo-nombre">Alessandro<strong>Poves</strong></span>
+                </a>
+            </div>
+
+            <nav class="navegacion-principal" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link activo">Inicio</a>
+                <a href="nosotros.html" class="nav-link">Nosotros</a>
+                <a href="clientes.html" class="nav-link">Clientes</a>
+                <a href="contactos.html" class="nav-link">Contacto</a>
+
+            </nav>
+
+            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </header>
-    <div class="nav-bg">
-        <nav class="navegacion-principal contenedor">
-            <a href="/index.html">Inicio</a>
-            <a href="/nosotros.html">Nosotros</a>
-            <a href="/clientes.html">Clientes</a>
-            <a href="/contactos.html">Contactos</a>
-        </nav>
-    </div>
 
-    <section class="hero">
-        <div class="contenido-hero">
-            <h2 class="titulo">Diseño y Desarrollo Web</h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-google-maps" width="76" height="76" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffbf00" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M12 9.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" />
-                        <path d="M6.428 12.494l7.314 -9.252" />
-                        <path d="M10.002 7.935l-2.937 -2.545" />
-                        <path d="M17.693 6.593l-8.336 9.979" />
-                        <path d="M17.591 6.376c.472 .907 .715 1.914 .709 2.935a7.263 7.263 0 0 1 -.72 3.18a19.085 19.085 0 0 1 -2.089 3c-.784 .933 -1.49 1.93 -2.11 2.98c-.314 .62 -.568 1.27 -.757 1.938c-.121 .36 -.277 .591 -.622 .591c-.315 0 -.463 -.136 -.626 -.593a10.595 10.595 0 0 0 -.779 -1.978a18.18 18.18 0 0 0 -1.423 -2.091c-.877 -1.184 -2.179 -2.535 -2.853 -4.071a7.077 7.077 0 0 1 -.621 -2.967a6.226 6.226 0 0 1 1.476 -4.055a6.25 6.25 0 0 1 4.811 -2.245a6.462 6.462 0 0 1 1.918 .284a6.255 6.255 0 0 1 3.686 3.092z" />
+    <!-- HERO -->
+    <section class="hero" aria-label="Presentación">
+        <div class="hero-overlay">
+            <div class="hero-content contenedor">
+                <p class="hero-tag">Desarrollador Web</p>
+                <h1 class="hero-titulo">Diseño &amp; Desarrollo<br><span>Web Profesional</span></h1>
+                <p class="hero-subtitulo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+                        <circle cx="12" cy="9" r="2.5"/>
                     </svg>
-                <p>Huancayo Junin Perú</p>
-
-                <a class="boton" href="#">Contactar</a>
+                    Huancayo, Junín — Perú
+                </p>
+                <div class="hero-acciones">
+                    <a class="boton boton-primario" href="#contacto">Contrátame</a>
+                    <a class="boton boton-outline" href="#servicios">Ver servicios</a>
+                </div>
+            </div>
         </div>
     </section>
-    
-    <main class="contenedor sombra">
-        <h2>Mis servicios</h2>
 
-        <div class="servicios">
-            <section class="servicio">
-                <h3>Diseño Web</h3>
-                    <div class="iconos">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
-                            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                        </svg>
-                    </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsam necessitatibus similique accusamus rem possimus quibusdam deserunt libero, quos, aspernatur tenetur facilis. Provident ut sed minima quidem libero saepe optio.</p>
-            </section>
+    <main>
 
-            <section class="servicio">
-                <h3>Aplicacion Web</h3>
-                    <div class="iconos">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-android" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M4 10l0 6" />
-                            <path d="M20 10l0 6" />
-                            <path d="M7 9h10v8a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-8a5 5 0 0 1 10 0" />
-                            <path d="M8 3l1 2" />
-                            <path d="M16 3l-1 2" />
-                            <path d="M9 18l0 3" />
-                            <path d="M15 18l0 3" />
-                        </svg>
-                    
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-apple" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M8.286 7.008c-3.216 0 -4.286 3.23 -4.286 5.92c0 3.229 2.143 8.072 4.286 8.072c1.165 -.05 1.799 -.538 3.214 -.538c1.406 0 1.607 .538 3.214 .538s4.286 -3.229 4.286 -5.381c-.03 -.011 -2.649 -.434 -2.679 -3.23c-.02 -2.335 2.589 -3.179 2.679 -3.228c-1.096 -1.606 -3.162 -2.113 -3.75 -2.153c-1.535 -.12 -3.032 1.077 -3.75 1.077c-.729 0 -2.036 -1.077 -3.214 -1.077z" />
-                            <path d="M12 4a2 2 0 0 0 2 -2a2 2 0 0 0 -2 2" />
-                        </svg>
-                    </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate rem sapiente provident ex ducimus ipsa consequatur rerum iusto? Sed molestiae totam ratione neque reprehenderit veniam aut quaerat explicabo. Tempora, corrupti!</p>
-            </section>
-        
-            <section class="servicio">
-                <h3>E-Commerce</h3>
-                    <div class="iconos">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-credit-card" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-                            <path d="M3 10l18 0" />
-                            <path d="M7 15l.01 0" />
-                            <path d="M11 15l2 0" />
-                        </svg>
-                    </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore tempore officia porro aliquid ipsa molestias dignissimos totam, et quos ut reiciendis eligendi! Eveniet rerum odio voluptatum ut repellendus omnis ex?</p>
-            </section>
-        </div>
-    
-        <section>
-            <h2>Contacto</h2>
-            <form class="formulario">
-                <fieldset>
-                    <legend>Contactanos llenando todos los campos</legend>
-                    <div class="contenedor-campos">
-                        <div class="campo">
-                            <label for="">Nombre</label>
-                            <input class="input-text" type="text" placeholder="Nombre">
-                        </div>
-                        <div class="campo">
-                            <label for="">Numero de celular</label>
-                            <input class="input-text" type="tel" placeholder="Numero de celular">
-                        </div>
-                        <div class="campo">
-                            <label for="">Correo</label>
-                            <input class="input-text" type="email" placeholder="Correo electronico">
-                        </div>
-                        <div class="campo">
-                            <label for="">Mensaje  </label>
-                            <textarea class="input-text"></textarea>
-                        </div>
-                    </div>
+        <!-- SERVICIOS con CSS Grid -->
+        <section class="seccion" id="servicios" aria-labelledby="titulo-servicios">
+            <div class="contenedor">
+                <div class="seccion-encabezado">
+                    <p class="seccion-tag">¿Qué ofrezco?</p>
+                    <h2 id="titulo-servicios">Mis Servicios</h2>
+                    <p class="seccion-desc">Soluciones digitales a medida para llevar tu negocio al siguiente nivel.</p>
+                </div>
 
-                        <div class="alinear-derecha flex">
-                            <input class="boton w-100" type="submit" value="Enviar">
+                <!-- Grid: repeat(auto-fit, minmax(250px, 1fr)) -->
+                <div class="tarjetas-grid">
+
+                    <article class="tarjeta">
+                        <div class="tarjeta-icono">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M12 21a9 9 0 0 1 0-18c4.97 0 9 3.582 9 8 0 1.06-.474 2.078-1.318 2.828-.844.75-1.989 1.172-3.182 1.172h-2.5a2 2 0 0 0-1 3.75 1.3 1.3 0 0 1-1 2.25"/>
+                                <path d="M8.5 10.5a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M12.5 7.5a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/><path d="M16.5 10.5a1 1 0 1 0 2 0 1 1 0 0 0-2 0"/>
+                            </svg>
                         </div>
-                    
-                </fieldset>
-            </form>
-            
+                        <h3>Diseño Web</h3>
+                        <p>Interfaces modernas, atractivas y centradas en el usuario. Diseños responsivos que funcionan en cualquier dispositivo.</p>
+                        <span class="tarjeta-badge">UI / UX</span>
+                    </article>
+
+                    <article class="tarjeta tarjeta-destacada">
+                        <div class="tarjeta-icono">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                            </svg>
+                        </div>
+                        <h3>Aplicación Web</h3>
+                        <p>Desarrollo de apps web completas y multiplataforma. Compatibles con Android, iOS, Windows y todos los navegadores modernos.</p>
+                        <span class="tarjeta-badge">Full Stack</span>
+                    </article>
+
+                    <article class="tarjeta">
+                        <div class="tarjeta-icono">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/>
+                                <path d="M7 15h.01M11 15h2"/>
+                            </svg>
+                        </div>
+                        <h3>E-Commerce</h3>
+                        <p>Tiendas online con pasarelas de pago seguras, gestión de inventario y experiencia de compra optimizada para convertir.</p>
+                        <span class="tarjeta-badge">Ventas Online</span>
+                    </article>
+
+                    <article class="tarjeta">
+                        <div class="tarjeta-icono">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/>
+                            </svg>
+                        </div>
+                        <h3>SEO &amp; Rendimiento</h3>
+                        <p>Optimización para motores de búsqueda, velocidad de carga y mejores prácticas de accesibilidad web (WCAG).</p>
+                        <span class="tarjeta-badge">SEO / WPO</span>
+                    </article>
+
+                </div>
+            </div>
         </section>
+
+        <!-- ESTADÍSTICAS -->
+        <section class="seccion seccion-stats" aria-label="Estadísticas">
+            <div class="contenedor">
+                <ul class="stats-grid">
+                    <li class="stat">
+                        <strong>+20</strong>
+                        <span>Proyectos</span>
+                    </li>
+                    <li class="stat">
+                        <strong>+15</strong>
+                        <span>Clientes</span>
+                    </li>
+                    <li class="stat">
+                        <strong>3</strong>
+                        <span>Años de exp.</span>
+                    </li>
+                    <li class="stat">
+                        <strong>100%</strong>
+                        <span>Satisfacción</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+        <section class="seccion" id="contacto" aria-labelledby="titulo-contacto">
+            <div class="contenedor">
+                <div class="seccion-encabezado">
+                    <p class="seccion-tag">¿Hablamos?</p>
+                    <h2 id="titulo-contacto">Contáctame</h2>
+                    <p class="seccion-desc">Completa el formulario y me pondré en contacto contigo a la brevedad.</p>
+                </div>
+
+                <form class="formulario" novalidate>
+                    <fieldset>
+                        <legend class="sr-only">Formulario de contacto</legend>
+
+                        <div class="form-grid">
+                            <div class="campo">
+                                <label for="nombre">Nombre completo</label>
+                                <input id="nombre" class="input-text" type="text" placeholder="Tu nombre" required autocomplete="name">
+                            </div>
+                            <div class="campo">
+                                <label for="telefono">Número de celular</label>
+                                <input id="telefono" class="input-text" type="tel" placeholder="+51 999 999 999" autocomplete="tel">
+                            </div>
+                            <div class="campo campo-full">
+                                <label for="correo">Correo electrónico</label>
+                                <input id="correo" class="input-text" type="email" placeholder="correo@ejemplo.com" required autocomplete="email">
+                            </div>
+                            <div class="campo campo-full">
+                                <label for="mensaje">Mensaje</label>
+                                <textarea id="mensaje" class="input-text" placeholder="Cuéntame sobre tu proyecto..." rows="5" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-enviar">
+                            <button class="boton boton-primario" type="submit">Enviar mensaje</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="footer">
-        <p>Todos los derechos reservados: Alessandro Poves - My first project Web</p>
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner contenedor">
+            <p class="footer-copy">&copy; 2025 <strong>Alessandro Poves</strong>. Todos los derechos reservados.</p>
+            <nav class="footer-nav" aria-label="Redes sociales">
+                <a href="https://www.linkedin.com/in/alessandro-piero-poves-martinez-524467318/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+                    </svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/SwodLore" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHub
+                </a>
+            </nav>
+        </div>
     </footer>
-        
+
 </body>
 </html>

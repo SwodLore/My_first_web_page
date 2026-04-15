@@ -1,107 +1,467 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Web</title>
+    <meta name="description" content="Clientes y proyectos de Alessandro Poves — Desarrollador Web en Huancayo, Perú.">
+    <meta name="author" content="Alessandro Poves">
+    <title>Clientes | Alessandro Poves</title>
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="preload" href="css/normalize.css" as="styles">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Krub&display=swap" rel="stylesheet">
-    <link rel="preload" href="css/styles.css" as="styles">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ── Estilos exclusivos de Clientes ── */
+
+        /* Filtros */
+        .filtros {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+        .filtro-btn {
+            padding: .8rem 2rem;
+            border: 1.5px solid var(--borde);
+            border-radius: 999px;
+            background: var(--blanco);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--texto-claro);
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .filtro-btn:hover,
+        .filtro-btn.activo {
+            background: var(--primario);
+            border-color: var(--primario);
+            color: var(--blanco);
+        }
+
+        /* Proyectos grid */
+        .proyectos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(32rem, 1fr));
+            gap: 2.8rem;
+        }
+        .proyecto-card {
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: var(--radio-lg);
+            overflow: hidden;
+            box-shadow: var(--sombra-sm);
+            transition: transform .25s, box-shadow .25s;
+            display: flex;
+            flex-direction: column;
+        }
+        .proyecto-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-lg);
+        }
+        .proyecto-imagen {
+            height: 19rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .proyecto-imagen span {
+            position: relative;
+            z-index: 1;
+        }
+        .proyecto-cuerpo { padding: 2.4rem; flex-grow: 1; display: flex; flex-direction: column; gap: .8rem; }
+        .proyecto-tipo {
+            display: inline-block;
+            padding: .3rem 1.1rem;
+            background: #EFF6FF;
+            color: var(--primario);
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 999px;
+            text-transform: uppercase;
+            letter-spacing: .07em;
+            width: fit-content;
+        }
+        .proyecto-cuerpo h3 { font-size: 1.9rem; color: var(--oscuro); }
+        .proyecto-cuerpo p { font-size: 1.5rem; color: var(--texto-claro); line-height: 1.7; flex-grow: 1; }
+        .proyecto-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .4rem; }
+        .proyecto-tag {
+            padding: .3rem .9rem;
+            background: var(--gris-claro);
+            border-radius: 999px;
+            font-size: 1.2rem;
+            color: var(--texto-claro);
+            font-weight: 500;
+        }
+        .proyecto-pie {
+            padding: 1.6rem 2.4rem;
+            border-top: 1px solid var(--borde);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .proyecto-estado {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        .proyecto-estado::before {
+            content: '';
+            width: .8rem; height: .8rem;
+            border-radius: 50%;
+            background: #22C55E;
+        }
+        .proyecto-estado.proceso::before { background: #F59E0B; }
+        .proyecto-link {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--primario);
+            display: flex; align-items: center; gap: .4rem;
+            transition: gap .2s;
+        }
+        .proyecto-link:hover { gap: .8rem; }
+
+        /* Testimonios */
+        .testimonios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+            gap: 2.4rem;
+        }
+        .testimonio-card {
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: var(--radio-lg);
+            padding: 3rem 2.8rem;
+            box-shadow: var(--sombra-sm);
+            position: relative;
+        }
+        .testimonio-card::before {
+            content: '\201C';
+            position: absolute;
+            top: 1.6rem; left: 2.4rem;
+            font-size: 6rem;
+            line-height: 1;
+            color: var(--primario);
+            opacity: .2;
+            font-family: Georgia, serif;
+        }
+        .testimonio-texto {
+            font-size: 1.55rem;
+            color: var(--texto-claro);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            padding-top: 1.2rem;
+        }
+        .testimonio-autor { display: flex; align-items: center; gap: 1.2rem; }
+        .testimonio-avatar {
+            width: 4.8rem; height: 4.8rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primario), #38BDF8);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .testimonio-nombre { font-weight: 700; font-size: 1.5rem; color: var(--oscuro); }
+        .testimonio-cargo { font-size: 1.3rem; color: var(--texto-claro); }
+        .estrellas { color: #F59E0B; font-size: 1.6rem; margin-bottom: .4rem; }
+
+        /* Logos clientes */
+        .logos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+            gap: 2rem;
+            align-items: center;
+        }
+        .logo-cliente {
+            background: var(--blanco);
+            border: 1px solid var(--borde);
+            border-radius: var(--radio-lg);
+            padding: 2.4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: box-shadow .25s, transform .25s;
+        }
+        .logo-cliente:hover { box-shadow: var(--sombra-md); transform: translateY(-3px); }
+        .logo-cliente-icono {
+            width: 5.2rem; height: 5.2rem;
+            border-radius: 1.2rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.6rem;
+        }
+        .logo-cliente span { font-size: 1.4rem; font-weight: 600; color: var(--oscuro); }
+
+        @media (max-width: 480px) {
+            .proyectos-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1 class="titulo"><a href="https://www.linkedin.com/in/alessandro-piero-poves-martinez-524467318/" referrerPolicy="no-referrer" target="_blank" class="font-bold underline" >Alessandro Poves</a> <span>:3</span></h1>
+
+    <header class="header">
+        <div class="header-inner contenedor">
+            <div class="logo">
+                <a href="index.html" aria-label="Inicio">
+                    <span class="logo-inicial">AP</span>
+                    <span class="logo-nombre">Alessandro<strong>Poves</strong></span>
+                </a>
+            </div>
+            <nav class="navegacion-principal" aria-label="Navegación principal">
+                <a href="index.html" class="nav-link">Inicio</a>
+                <a href="nosotros.html" class="nav-link">Nosotros</a>
+                <a href="clientes.html" class="nav-link activo">Clientes</a>
+                <a href="contactos.html" class="nav-link">Contacto</a>
+            </nav>
+            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
     </header>
-    <div class="nav-bg">
-        <nav class="navegacion-principal contenedor">
-            <a href="/index.html">Inicio</a>
-            <a href="/nosotros.html">Nosotros</a>
-            <a href="/clientes.html">Clientes</a>
-            <a href="/contactos.html">Contactos</a>
-        </nav>
-    </div>
 
-    <section class="hero">
-        <div class="contenido-hero">
-            <h2 class="titulo">Diseño y Desarrollo Web</h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-google-maps" width="76" height="76" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffbf00" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                        <path d="M12 9.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" />
-                        <path d="M6.428 12.494l7.314 -9.252" />
-                        <path d="M10.002 7.935l-2.937 -2.545" />
-                        <path d="M17.693 6.593l-8.336 9.979" />
-                        <path d="M17.591 6.376c.472 .907 .715 1.914 .709 2.935a7.263 7.263 0 0 1 -.72 3.18a19.085 19.085 0 0 1 -2.089 3c-.784 .933 -1.49 1.93 -2.11 2.98c-.314 .62 -.568 1.27 -.757 1.938c-.121 .36 -.277 .591 -.622 .591c-.315 0 -.463 -.136 -.626 -.593a10.595 10.595 0 0 0 -.779 -1.978a18.18 18.18 0 0 0 -1.423 -2.091c-.877 -1.184 -2.179 -2.535 -2.853 -4.071a7.077 7.077 0 0 1 -.621 -2.967a6.226 6.226 0 0 1 1.476 -4.055a6.25 6.25 0 0 1 4.811 -2.245a6.462 6.462 0 0 1 1.918 .284a6.255 6.255 0 0 1 3.686 3.092z" />
-                    </svg>
-                <p>Huancayo Junin Perú</p>
-
-                <a class="boton" href="#">Contactar</a>
+    <!-- PAGE HERO -->
+    <section class="page-hero" aria-label="Encabezado Clientes">
+        <div class="page-hero-content contenedor">
+            <p class="seccion-tag">Portafolio</p>
+            <h1>Clientes &amp; Proyectos</h1>
+            <p>Empresas y personas que confiaron su presencia digital en mis manos.</p>
         </div>
     </section>
-    
-    <main class="contenedor sombra">
-        <h2>Clientes</h2>
 
-        <div class="servicios">
-            <section class="servicio">
-                <h3>Google</h3>
-                    <div class="iconos">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-palette" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
-                            <path d="M8.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                            <path d="M12.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                            <path d="M16.5 10.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-                        </svg>
-                    </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi ipsam necessitatibus similique accusamus rem possimus quibusdam deserunt libero, quos, aspernatur tenetur facilis. Provident ut sed minima quidem libero saepe optio.</p>
-            </section>
+    <main>
 
-            <section class="servicio">
-                <h3>GitHub</h3>
-                    <div class="iconos">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-android" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M4 10l0 6" />
-                            <path d="M20 10l0 6" />
-                            <path d="M7 9h10v8a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-8a5 5 0 0 1 10 0" />
-                            <path d="M8 3l1 2" />
-                            <path d="M16 3l-1 2" />
-                            <path d="M9 18l0 3" />
-                            <path d="M15 18l0 3" />
-                        </svg>
-                    
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-apple" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M8.286 7.008c-3.216 0 -4.286 3.23 -4.286 5.92c0 3.229 2.143 8.072 4.286 8.072c1.165 -.05 1.799 -.538 3.214 -.538c1.406 0 1.607 .538 3.214 .538s4.286 -3.229 4.286 -5.381c-.03 -.011 -2.649 -.434 -2.679 -3.23c-.02 -2.335 2.589 -3.179 2.679 -3.228c-1.096 -1.606 -3.162 -2.113 -3.75 -2.153c-1.535 -.12 -3.032 1.077 -3.75 1.077c-.729 0 -2.036 -1.077 -3.214 -1.077z" />
-                            <path d="M12 4a2 2 0 0 0 2 -2a2 2 0 0 0 -2 2" />
-                        </svg>
+        <!-- LOGOS CLIENTES -->
+        <section class="seccion" aria-labelledby="titulo-empresas">
+            <div class="contenedor">
+                <div class="seccion-encabezado">
+                    <p class="seccion-tag">Con quiénes trabajo</p>
+                    <h2 id="titulo-empresas">Empresas &amp; Marcas</h2>
+                    <p class="seccion-desc">Clientes de distintas industrias que apuestan por el desarrollo web profesional.</p>
+                </div>
+                <div class="logos-grid">
+                    <div class="logo-cliente">
+                        <div class="logo-cliente-icono" style="background:#F0FDF4;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        </div>
+                        <span>Inmobiliaria Andina</span>
                     </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate rem sapiente provident ex ducimus ipsa consequatur rerum iusto? Sed molestiae totam ratione neque reprehenderit veniam aut quaerat explicabo. Tempora, corrupti!</p>
-            </section>
-        
-            <section class="servicio">
-                <h3>E-Commerce</h3>
-                    <div class="iconos">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-credit-card" width="56" height="56" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-                            <path d="M3 10l18 0" />
-                            <path d="M7 15l.01 0" />
-                            <path d="M11 15l2 0" />
-                        </svg>
+                    <div class="logo-cliente">
+                        <div class="logo-cliente-icono" style="background:#EFF6FF;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        </div>
+                        <span>TiendaCenter</span>
                     </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore tempore officia porro aliquid ipsa molestias dignissimos totam, et quos ut reiciendis eligendi! Eveniet rerum odio voluptatum ut repellendus omnis ex?</p>
-            </section>
-        </div>
+                    <div class="logo-cliente">
+                        <div class="logo-cliente-icono" style="background:#FFF7ED;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EA580C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <span>Consultora Poves</span>
+                    </div>
+                    <div class="logo-cliente">
+                        <div class="logo-cliente-icono" style="background:#FDF4FF;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                        </div>
+                        <span>DevSchool HYO</span>
+                    </div>
+                    <div class="logo-cliente">
+                        <div class="logo-cliente-icono" style="background:#FFF1F2;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#E11D48" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        </div>
+                        <span>Bienestar &amp; Salud</span>
+                    </div>
+                    <div class="logo-cliente">
+                        <div class="logo-cliente-icono" style="background:#ECFDF5;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <span>FinanzasPro</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROYECTOS -->
+        <section class="seccion" style="background-color: var(--gris-claro);" aria-labelledby="titulo-proyectos">
+            <div class="contenedor">
+                <div class="seccion-encabezado">
+                    <p class="seccion-tag">Lo que construí</p>
+                    <h2 id="titulo-proyectos">Proyectos Destacados</h2>
+                    <p class="seccion-desc">Una selección de los trabajos más representativos de mi portafolio.</p>
+                </div>
+
+                <div class="filtros" role="group" aria-label="Filtrar proyectos">
+                    <button class="filtro-btn activo">Todos</button>
+                    <button class="filtro-btn">Diseño Web</button>
+                    <button class="filtro-btn">E-Commerce</button>
+                    <button class="filtro-btn">Landing Page</button>
+                </div>
+
+                <div class="proyectos-grid">
+
+                    <article class="proyecto-card">
+                        <div class="proyecto-imagen" style="background: linear-gradient(135deg,#EFF6FF,#BFDBFE);">
+                            <span>🏠</span>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-tipo">Diseño Web</span>
+                            <h3>Inmobiliaria Andina</h3>
+                            <p>Sitio web corporativo para agencia inmobiliaria de Huancayo. Incluye catálogo de propiedades, galería de imágenes y formulario de contacto.</p>
+                            <div class="proyecto-tags">
+                                <span class="proyecto-tag">HTML5</span>
+                                <span class="proyecto-tag">CSS3</span>
+                                <span class="proyecto-tag">Grid</span>
+                            </div>
+                        </div>
+                        <div class="proyecto-pie">
+                            <span class="proyecto-estado">Completado</span>
+                            <a href="contactos.html" class="proyecto-link">Ver detalles →</a>
+                        </div>
+                    </article>
+
+                    <article class="proyecto-card">
+                        <div class="proyecto-imagen" style="background: linear-gradient(135deg,#F0FDF4,#BBF7D0);">
+                            <span>🛒</span>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-tipo">E-Commerce</span>
+                            <h3>TiendaCenter</h3>
+                            <p>Tienda online completa con catálogo de productos, carrito de compras, pasarela de pago y panel de administración básico.</p>
+                            <div class="proyecto-tags">
+                                <span class="proyecto-tag">HTML5</span>
+                                <span class="proyecto-tag">CSS3</span>
+                                <span class="proyecto-tag">JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="proyecto-pie">
+                            <span class="proyecto-estado">Completado</span>
+                            <a href="contactos.html" class="proyecto-link">Ver detalles →</a>
+                        </div>
+                    </article>
+
+                    <article class="proyecto-card">
+                        <div class="proyecto-imagen" style="background: linear-gradient(135deg,#FDF4FF,#E9D5FF);">
+                            <span>🎓</span>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-tipo">Landing Page</span>
+                            <h3>DevSchool HYO</h3>
+                            <p>Landing page para academia de programación con secciones de cursos, testimonios, inscripción y optimización SEO completa.</p>
+                            <div class="proyecto-tags">
+                                <span class="proyecto-tag">Flexbox</span>
+                                <span class="proyecto-tag">SEO</span>
+                                <span class="proyecto-tag">Responsivo</span>
+                            </div>
+                        </div>
+                        <div class="proyecto-pie">
+                            <span class="proyecto-estado proceso">En progreso</span>
+                            <a href="contactos.html" class="proyecto-link">Ver detalles →</a>
+                        </div>
+                    </article>
+
+                    <article class="proyecto-card">
+                        <div class="proyecto-imagen" style="background: linear-gradient(135deg,#FFF1F2,#FECDD3);">
+                            <span>❤️</span>
+                        </div>
+                        <div class="proyecto-cuerpo">
+                            <span class="proyecto-tipo">Diseño Web</span>
+                            <h3>Bienestar &amp; Salud</h3>
+                            <p>Sitio web para clínica de nutrición y bienestar. Agenda de citas online, blog informativo y diseño accesible para todo público.</p>
+                            <div class="proyecto-tags">
+                                <span class="proyecto-tag">Accesibilidad</span>
+                                <span class="proyecto-tag">CSS Grid</span>
+                                <span class="proyecto-tag">Forms</span>
+                            </div>
+                        </div>
+                        <div class="proyecto-pie">
+                            <span class="proyecto-estado">Completado</span>
+                            <a href="contactos.html" class="proyecto-link">Ver detalles →</a>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIOS -->
+        <section class="seccion" aria-labelledby="titulo-testimonios">
+            <div class="contenedor">
+                <div class="seccion-encabezado">
+                    <p class="seccion-tag">Lo que dicen</p>
+                    <h2 id="titulo-testimonios">Testimonios</h2>
+                    <p class="seccion-desc">La opinión de quienes ya trabajaron conmigo.</p>
+                </div>
+                <div class="testimonios-grid">
+                    <blockquote class="testimonio-card">
+                        <div class="estrellas">★★★★★</div>
+                        <p class="testimonio-texto">Alessandro entregó nuestro sitio web antes del plazo y con una calidad impresionante. El diseño responsivo funciona perfecto en todos los dispositivos. Lo recomendamos al 100%.</p>
+                        <footer class="testimonio-autor">
+                            <div class="testimonio-avatar">RM</div>
+                            <div>
+                                <p class="testimonio-nombre">Rosa Martínez</p>
+                                <p class="testimonio-cargo">Gerente — Inmobiliaria Andina</p>
+                            </div>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonio-card">
+                        <div class="estrellas">★★★★★</div>
+                        <p class="testimonio-texto">Excelente trabajo. Nuestra tienda online triplicó las ventas desde que Alessandro rediseñó la plataforma. La experiencia de compra es mucho más fluida ahora.</p>
+                        <footer class="testimonio-autor">
+                            <div class="testimonio-avatar">CL</div>
+                            <div>
+                                <p class="testimonio-nombre">Carlos Lazo</p>
+                                <p class="testimonio-cargo">Dueño — TiendaCenter</p>
+                            </div>
+                        </footer>
+                    </blockquote>
+                    <blockquote class="testimonio-card">
+                        <div class="estrellas">★★★★★</div>
+                        <p class="testimonio-texto">Muy profesional y atento. Supo entender nuestra visión y la plasmó exactamente como queríamos. El SEO también mejoró notablemente en pocos meses.</p>
+                        <footer class="testimonio-autor">
+                            <div class="testimonio-avatar">MP</div>
+                            <div>
+                                <p class="testimonio-nombre">María Palomino</p>
+                                <p class="testimonio-cargo">Directora — Bienestar &amp; Salud</p>
+                            </div>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="seccion" style="background-color: var(--gris-claro);" aria-label="Llamada a la acción">
+            <div class="contenedor" style="text-align: center;">
+                <p class="seccion-tag">¿Tu proyecto aquí?</p>
+                <h2 style="margin-bottom:1.2rem;">Tu negocio puede ser el próximo</h2>
+                <p style="font-size:1.7rem; color:var(--texto-claro); max-width:50rem; margin-inline:auto; margin-bottom:2.4rem;">Cuéntame tu idea y construimos juntos la presencia digital que mereces.</p>
+                <a href="contactos.html" class="boton boton-primario" style="font-size:1.7rem; padding:1.4rem 4rem;">Iniciar proyecto</a>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="footer">
-        <p>Todos los derechos reservados: Alessandro Poves - My first project Web</p>
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner contenedor">
+            <p class="footer-copy">&copy; 2025 <strong>Alessandro Poves</strong>. Todos los derechos reservados.</p>
+            <nav class="footer-nav" aria-label="Redes sociales">
+                <a href="https://www.linkedin.com/in/alessandro-piero-poves-martinez-524467318/" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/SwodLore" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    GitHub
+                </a>
+            </nav>
+        </div>
     </footer>
-        
+
 </body>
 </html>
