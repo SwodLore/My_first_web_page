@@ -36,6 +36,7 @@ body {
     color: var(--texto);
     background-color: var(--blanco);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 img { max-width: 100%; display: block; }
@@ -451,7 +452,7 @@ a { text-decoration: none; color: inherit; }
 .input-text::placeholder { color: rgba(255,255,255,.3); }
 .input-text:focus {
     border-color: var(--primario);
-    background-color: rgba(99,102,241,.08);
+    background-color: rgba(37,99,235,.08);
 }
 
 .campo textarea.input-text {
@@ -537,11 +538,17 @@ a { text-decoration: none; color: inherit; }
    MEDIA QUERIES — DISEÑO RESPONSIVO
    ============================================= */
 
-/* Tablet */
+/* ── Tablet: ≤ 768px ── */
 @media (max-width: 768px) {
-    /* Header: hamburguesa visible */
+
+    /* Contenedor: más padding lateral */
+    .contenedor { padding-inline: 1.6rem; }
+
+    /* Header: muestra hamburguesa */
+    .header { position: relative; }
     .menu-toggle { display: flex; }
 
+    /* Nav desplegable */
     .navegacion-principal {
         display: none;
         position: absolute;
@@ -550,42 +557,77 @@ a { text-decoration: none; color: inherit; }
         right: 0;
         background-color: var(--blanco);
         flex-direction: column;
-        padding: 1.6rem;
+        padding: 1.2rem 1.6rem 1.6rem;
         gap: .4rem;
         border-top: 1px solid var(--borde);
         box-shadow: var(--sombra-md);
+        z-index: 200;
     }
     .navegacion-principal.abierto { display: flex; }
-    .header { position: relative; }
+
+    /* Animación hamburguesa → X */
+    .menu-toggle.abierto span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .menu-toggle.abierto span:nth-child(2) { opacity: 0; }
+    .menu-toggle.abierto span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
     /* Hero */
-    .hero { min-height: 48rem; }
-    .hero-titulo { font-size: 3.2rem; }
+    .hero { min-height: 42rem; }
+    .hero-titulo { font-size: 3rem; }
+    .hero-content { padding-block: 4rem; }
+
+    /* Secciones */
+    .seccion { padding-block: 5rem; }
+    .seccion-encabezado { margin-bottom: 3.6rem; }
+
+    /* Tarjetas */
+    .tarjetas-grid { grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr)); }
 
     /* Formulario: 1 columna */
     .form-grid { grid-template-columns: 1fr; }
     .campo-full { grid-column: auto; }
     .formulario { padding: 2.8rem 2.4rem; }
+
+    /* Page hero */
+    .page-hero { padding-block: 4.5rem 3.5rem; }
+    .page-hero-content h1 { font-size: 3.2rem; }
+    .page-hero-content p { font-size: 1.6rem; }
 }
 
-/* Móvil */
+/* ── Móvil: ≤ 480px ── */
 @media (max-width: 480px) {
-    .hero-acciones { flex-direction: column; }
+
+    /* Tipografía */
+    h2 { font-size: 2.4rem; }
+
+    /* Header logo: ocultar nombre en pantallas muy pequeñas */
+    .logo-nombre { display: none; }
+
+    /* Hero */
+    .hero { min-height: 38rem; }
+    .hero-titulo { font-size: 2.6rem; }
+    .hero-tag { font-size: 1.2rem; }
+    .hero-subtitulo { font-size: 1.5rem; }
+    .hero-acciones { flex-direction: column; align-items: stretch; }
     .boton { width: 100%; justify-content: center; }
 
-    .tarjetas-grid {
-        grid-template-columns: 1fr;
-    }
+    /* Tarjetas: 1 columna fija */
+    .tarjetas-grid { grid-template-columns: 1fr; }
 
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    /* Stats: 2 por fila */
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
 
-    .footer-inner {
-        flex-direction: column;
-        text-align: center;
-    }
+    /* Secciones */
+    .seccion { padding-block: 4rem; }
+    .seccion-encabezado { margin-bottom: 2.8rem; }
 
-    .seccion { padding-block: 5rem; }
+    /* Formulario */
     .formulario { padding: 2rem 1.6rem; }
+
+    /* Footer */
+    .footer-inner { flex-direction: column; text-align: center; }
+    .footer-nav { justify-content: center; }
+
+    /* Page hero */
+    .page-hero { padding-block: 3.6rem 2.8rem; }
+    .page-hero-content h1 { font-size: 2.8rem; }
 }

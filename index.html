@@ -212,5 +212,23 @@
         </div>
     </footer>
 
+
+    <script>
+        const toggle = document.querySelector('.menu-toggle');
+        const nav    = document.querySelector('.navegacion-principal');
+        toggle.addEventListener('click', () => {
+            const abierto = nav.classList.toggle('abierto');
+            toggle.classList.toggle('abierto', abierto);
+            toggle.setAttribute('aria-expanded', abierto);
+        });
+        // Cerrar al hacer clic en un enlace
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('abierto');
+                toggle.classList.remove('abierto');
+                toggle.setAttribute('aria-expanded', false);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -464,6 +464,22 @@
     </footer>
 
     <script>
+        // Hamburger menu
+        const toggle = document.querySelector('.menu-toggle');
+        const nav    = document.querySelector('.navegacion-principal');
+        toggle.addEventListener('click', () => {
+            const abierto = nav.classList.toggle('abierto');
+            toggle.classList.toggle('abierto', abierto);
+            toggle.setAttribute('aria-expanded', abierto);
+        });
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('abierto');
+                toggle.classList.remove('abierto');
+                toggle.setAttribute('aria-expanded', false);
+            });
+        });
+
         // FAQ accordion
         document.querySelectorAll('.faq-pregunta').forEach(btn => {
             btn.addEventListener('click', () => {
